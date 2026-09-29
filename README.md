@@ -34,7 +34,25 @@ npm run build
 npm start
 ```
 
-## راه‌اندازی Supabase (ذخیره‌ی واقعی لیست انتظار)
+## دیپلوی روی Vercel
+
+1. یه ریپو خالی توی GitHub بساز (بدون README/gitignore).
+2. توی پوشه‌ی پروژه:
+   ```bash
+   git remote add origin https://github.com/USERNAME/REPO.git
+   git push -u origin main
+   ```
+   (یک commit اولیه از قبل روی این پروژه ثبت شده؛ فقط remote رو وصل کن و push بزن.)
+3. برو [vercel.com](https://vercel.com)، با گیت‌هاب وارد شو، **Add New → Project** و همین ریپو رو انتخاب کن. فریم‌ورک به‌صورت خودکار Next.js تشخیص داده می‌شود.
+4. قبل از زدن Deploy، تو بخش **Environment Variables** این‌ها رو اضافه کن (همون مقادیر `.env.local`):
+   - `SUPABASE_URL`
+   - `SUPABASE_SERVICE_ROLE_KEY`
+   - `NEXT_PUBLIC_SITE_URL` → آدرس دامنه‌ی نهایی (اگر هنوز دامنه نخریدی، فعلاً خالی بذار؛ خودش از دامنه‌ی پیش‌فرض `xxx.vercel.app` استفاده می‌کند)
+5. **Deploy** رو بزن. چند ثانیه بعد یه لینک `.vercel.app` می‌گیری که سایت رویش زنده است.
+6. هر بار که به شاخه‌ی `main` push کنی، Vercel خودش دوباره دیپلوی می‌کند.
+7. وقتی دامنه‌ی واقعی خریدی: **Project Settings → Domains** → دامنه رو اضافه کن، رکوردهای DNS که Vercel نشون می‌ده رو توی پنل دامنه‌ت ثبت کن، و `NEXT_PUBLIC_SITE_URL` رو هم به همون دامنه آپدیت کن.
+
+
 
 1. یک حساب رایگان در [supabase.com](https://supabase.com) بساز و یک پروژه‌ی جدید بزن.
 2. برو به **SQL Editor** و محتوای فایل `supabase/schema.sql` را اجرا کن تا جدول `waitlist` ساخته شود.
